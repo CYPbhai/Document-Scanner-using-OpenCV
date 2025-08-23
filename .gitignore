@@ -43,3 +43,4 @@
 # Ignore liabraries folder
 **/Liabraries/
 
+.vs
