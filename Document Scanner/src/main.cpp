@@ -238,7 +238,7 @@ void computeScaledDisplay() {
 }
 
 int main(int argc, char** argv) {
-    string path = (argc > 1) ? argv[1] : "Resources/paper.jpg";
+    string path = (argc > 1) ? argv[1] : "Resources/cards.jpg";
     imgOrig = imread(path);
     if (imgOrig.empty()) {
         cerr << "Cannot open " << path << "\n";
@@ -344,7 +344,6 @@ int main(int argc, char** argv) {
             break;
         }
     }
-
     destroyAllWindows();
     return 0;
 }
