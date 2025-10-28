@@ -25,9 +25,6 @@
     <Image Include="resources\paper.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="bin\Debug x64\Document Scanner.exe" />
     <None Include="bin\Debug x64\Document Scanner.pdb" />
     <None Include="bin\Debug x64\opencv_annotation.exe" />
@@ -50,6 +47,7 @@
     <None Include="bin\Release x64\opencv_visualisation.exe" />
     <None Include="bin\Release x64\opencv_world4120.dll" />
     <None Include="bin\Release x64\opencv_world4120.pdb" />
+    <None Include="imgui.ini" />
     <None Include="Intermediates\Document Scanner.exe.recipe" />
     <None Include="Intermediates\Document Scanner.ilk" />
     <None Include="Intermediates\Document Scanner.iobj" />
@@ -72,10 +70,26 @@
     <None Include="Liabraries\opencv\build\x64\vc16\lib\OpenCVModules.cmake" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="Liabraries\GLFW\glfw3.lib" />
     <Library Include="Liabraries\opencv\build\x64\vc16\lib\opencv_world4120.lib" />
     <Library Include="Liabraries\opencv\build\x64\vc16\lib\opencv_world4120d.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Liabraries\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="Liabraries\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="Liabraries\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Liabraries\dirent\dirent.h" />
+    <ClInclude Include="Liabraries\GLFW\glfw3.h" />
+    <ClInclude Include="Liabraries\GLFW\glfw3native.h" />
+    <ClInclude Include="Liabraries\imgui\imconfig.h" />
+    <ClInclude Include="Liabraries\imgui\imgui.h" />
+    <ClInclude Include="Liabraries\imgui\ImGuiFileDialog.h" />
+    <ClInclude Include="Liabraries\imgui\ImGuiFileDialogConfig.h" />
+    <ClInclude Include="Liabraries\imgui\imgui_internal.h" />
+    <ClInclude Include="Liabraries\imgui\imgui_stdlib.h" />
+    <ClInclude Include="Liabraries\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Liabraries\imgui\imstb_textedit.h" />
+    <ClInclude Include="Liabraries\imgui\imstb_truetype.h" />
     <ClInclude Include="Liabraries\opencv\include\opencv2\calib3d.hpp" />
     <ClInclude Include="Liabraries\opencv\include\opencv2\calib3d\calib3d.hpp" />
     <ClInclude Include="Liabraries\opencv\include\opencv2\calib3d\calib3d_c.h" />
@@ -425,6 +439,8 @@
     <ClInclude Include="Liabraries\opencv\include\opencv2\video\tracking.hpp" />
     <ClInclude Include="Liabraries\opencv\include\opencv2\video\video.hpp" />
     <ClInclude Include="Liabraries\opencv\include\opencv2\world.hpp" />
+    <ClInclude Include="Liabraries\portable-file-dialogs.h" />
+    <ClInclude Include="src\Core.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Intermediates\Document Scanner.Build.CppClean.log" />
@@ -433,6 +449,17 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="Intermediates\main.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Liabraries\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Liabraries\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Liabraries\imgui\imgui.cpp" />
+    <ClCompile Include="Liabraries\imgui\ImGuiFileDialog.cpp" />
+    <ClCompile Include="Liabraries\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Liabraries\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="Liabraries\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Liabraries\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -487,14 +514,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>Liabraries\opencv\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>Liabraries\opencv\build\x64\vc16\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>Liabraries\opencv\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);Liabraries</IncludePath>
+    <LibraryPath>Liabraries\opencv\build\x64\vc16\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);Liabraries\GLFW</LibraryPath>
     <OutDir>.\bin\Debug x64\</OutDir>
     <IntDir>.\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>Liabraries\opencv\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>Liabraries\opencv\build\x64\vc16\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>Liabraries\opencv\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);Liabraries</IncludePath>
+    <LibraryPath>Liabraries\opencv\build\x64\vc16\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);Liabraries\GLFW</LibraryPath>
     <OutDir>.\bin\Release x64\</OutDir>
     <IntDir>.\Intermediates\</IntDir>
   </PropertyGroup>
@@ -536,7 +563,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world4120d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;opencv_world4120d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -552,7 +579,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world4120.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;;opencv_world4120.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
